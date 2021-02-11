@@ -1,0 +1,38 @@
+server:
+    port: 8091
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://localhost:8090/eureka/
+
+logging:
+    level:
+        org.springframework: DEBUG
+
+management:
+    endpoint:
+        web:
+            exposure:
+                include: "*"
+#Actuator
+
+h2:
+    console:
+        enabled: true
+
+spring:
+    jpa:
+        show-sql: true
+    application:
+        name: cart
+
+restTemplate:
+    factory:
+        readTimeout: 5000
+        connectTimeout: 3000
+    httpClient:
+        maxConnTotal: 100
+        maxConnPerRoute: 5
