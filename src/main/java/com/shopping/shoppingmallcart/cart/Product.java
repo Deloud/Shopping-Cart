@@ -17,11 +17,10 @@ import javax.validation.constraints.Size;
 @Entity
 @ApiModel(description = "물건 정보를 위한 도메인 객체")
 public class Product {
-//    @Id
-//    @GeneratedValue
-//    private Integer id;
-
     @Id
+    @GeneratedValue
+    private Integer id;
+
     private Integer product_id;
 
     @ApiModelProperty(notes = "물건 이름을 입력해주세요") //SWAGGER

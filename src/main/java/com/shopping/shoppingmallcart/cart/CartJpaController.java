@@ -75,8 +75,6 @@ public class CartJpaController {
 
         Product product = restTemplate.getForObject("http://localhost:8088/".concat(Integer.toString(param.getProduct_id())), Product.class);
 
-//        product.setId(order_id);
-//        order_id +=1;
         product.setProduct_id((param.getProduct_id()));
         product.setCart(cart.get());
         product.setCount(param.getCount());
@@ -95,22 +93,23 @@ public class CartJpaController {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/{id}/{product_id}")
-    public void deleteProduct(@PathVariable int id, @PathVariable int product_id) {
+    @DeleteMapping("/{id}/{order_id}")
+    public void deleteProduct(@PathVariable int id, @PathVariable int order_id) {
         Optional<Cart> cart = cartRepository.findById(id);
 
 
         if (!cart.isPresent()) {
             throw new CartNotFoundException(String.format("ID[%s} not found", id));
         } else {
-            Optional<Product> product = productRepository.findById(product_id);
+            Optional<Product> product = productRepository.findById(order_id);
             Cart newcart = cart.get();
             newcart.setTotal_price(cart.get().getTotal_price() - product.get().getPrice()*product.get().getCount() );
             cartRepository.save(newcart);
-            productRepository.deleteById(product_id);
+            productRepository.deleteById(order_id);
         }
     }
 
+    //전체삭제
     @DeleteMapping("/{id}/all")
     public void deleteProductAll(@PathVariable int id) {
         Optional<Cart> cart = cartRepository.findById(id);
@@ -119,12 +118,15 @@ public class CartJpaController {
         if (!cart.isPresent()) {
             throw new CartNotFoundException(String.format("ID[%s} not found", id));
         } else {
-            Cart newcart = cart.get();
+            Cart newcart = new Cart();
+            newcart.setId(cart.get().getId());
             newcart.setTotal_price(0);
-//            cart.getproducts();
-            productRepository.deleteById(1);
-            productRepository.deleteById(2);
-            productRepository.deleteById(3);
+            newcart.setProducts(null);
+            List<Product> remain_pro = cart.get().getProducts();
+            for(int i =0; i < remain_pro.size(); i++){
+                productRepository.deleteById(remain_pro.get(i).getId());
+            }
+            cartRepository.deleteById(id);
             cartRepository.save(newcart);
         }
     }
