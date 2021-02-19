@@ -31,6 +31,8 @@ public class CartJpaController {
     @Autowired
     RestTemplate restTemplate;
 
+    private static int order_id;
+
 //    private Logger LOGGER = LoggerFactory.getLogger(CartJpaController.class);
 
     @GetMapping("")
@@ -43,6 +45,15 @@ public class CartJpaController {
     // /jpa/users/90001/posts
     @GetMapping("/{id}")
     public Optional<Cart> retrieveAllPostsByUser(@PathVariable int id) {
+
+//        int get_user_id = restTemplate.getForObject("http://localhost:8089/".concat(Integer.toString(id)),int);
+//
+//        product.setCart(cart.get());
+//        product.setCount(param.getCount());
+//        Product savedPost = productRepository.save(product);
+
+
+        //----------
         Optional<Cart> cart = cartRepository.findById(id);
 
         if (!cart.isPresent()) {
@@ -53,30 +64,32 @@ public class CartJpaController {
         return cart;
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Product> addProduct(@PathVariable int id, @RequestBody Param param){
+    @PostMapping("")
+    public ResponseEntity<Product> addProduct(@RequestBody Param param){
 
-        Optional<Cart> cart = cartRepository.findById(id);
+        Optional<Cart> cart = cartRepository.findById(param.getUser_id());
 
         if (!cart.isPresent()){
-            throw new CartNotFoundException(String.format("ID[%s] not found", id));
+            throw new CartNotFoundException(String.format("ID[%s] not found", param.getUser_id()));
         }
-
 
         Product product = restTemplate.getForObject("http://localhost:8088/".concat(Integer.toString(param.getProduct_id())), Product.class);
 
+//        product.setId(order_id);
+//        order_id +=1;
+        product.setProduct_id((param.getProduct_id()));
         product.setCart(cart.get());
         product.setCount(param.getCount());
-        Product savedPost = productRepository.save(product);
-//        System.out.println("&&&&&&&&&&"+cart.get() + "&&&&&&&&"+product.getPrice()+"==========================="+product.getId());
+        Product savedProduct = productRepository.save(product);
 
+//
         Cart newcart = cart.get();
         newcart.setTotal_price(cart.get().getTotal_price() + product.getPrice()*product.getCount());
         cartRepository.save(newcart);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(savedPost.getId())
+                .buildAndExpand(savedProduct.getProduct_id())
                 .toUri();
 
         return ResponseEntity.created(location).build();
@@ -97,5 +110,41 @@ public class CartJpaController {
             productRepository.deleteById(product_id);
         }
     }
+
+    @DeleteMapping("/{id}/all")
+    public void deleteProductAll(@PathVariable int id) {
+        Optional<Cart> cart = cartRepository.findById(id);
+
+
+        if (!cart.isPresent()) {
+            throw new CartNotFoundException(String.format("ID[%s} not found", id));
+        } else {
+            Cart newcart = cart.get();
+            newcart.setTotal_price(0);
+//            cart.getproducts();
+            productRepository.deleteById(1);
+            productRepository.deleteById(2);
+            productRepository.deleteById(3);
+            cartRepository.save(newcart);
+        }
+    }
+
+//    //order에 추가하는 것 --> order서비스에 추가됨
+//    @GetMapping("/{id}/purchase")
+//    public int AddOrder(@PathVariable int id) {
+//        Optional<Cart> cart = cartRepository.findById(id);
+//
+//        if (!cart.isPresent()) {
+//            throw new CartNotFoundException(String.format("ID[%s} not found", id));
+//        }
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//
+//        Cart newcart = cart.get();
+//
+//        Cart result = restTemplate.postForObject("http://localhost:8092/SpringMvcSample/test/jsonRequest", newcart, Cart.class);
+//
+//        return cart.get().getTotal_price();
+//    }
 
 }

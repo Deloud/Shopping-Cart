@@ -13,6 +13,7 @@ import javax.persistence.Id;
 @Entity
 public class Param {
     @Id
+    private int user_id;
     private int product_id;
     private int count;
 }
