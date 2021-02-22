@@ -2,6 +2,8 @@ package com.shopping.shoppingmallcart.cart;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +30,16 @@ public class CartJpaController {
     @Autowired
     private ProductRepository productRepository;
 
+
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder){
+        return builder.build();
+    }
     @Autowired
     RestTemplate restTemplate;
 
-    private static int order_id;
+//    private static int order_id;
 
 //    private Logger LOGGER = LoggerFactory.getLogger(CartJpaController.class);
 
@@ -61,6 +69,8 @@ public class CartJpaController {
         }
 
 //        return cart.get().getProducts();
+//        System.out.println(cart.get().getProducts());
+//        System.out.println("!!!!!!!!!!!!!");
         return cart;
     }
 
