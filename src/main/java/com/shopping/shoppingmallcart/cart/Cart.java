@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
+import org.springframework.stereotype.Service;
+
 
 @Data
 @AllArgsConstructor

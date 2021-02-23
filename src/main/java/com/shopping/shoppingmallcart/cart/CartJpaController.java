@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -39,9 +39,6 @@ public class CartJpaController {
     @Autowired
     RestTemplate restTemplate;
 
-//    private static int order_id;
-
-//    private Logger LOGGER = LoggerFactory.getLogger(CartJpaController.class);
 
     @GetMapping("")
     public List<Cart> retrieveAllCarts(){

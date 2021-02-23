@@ -31,8 +31,8 @@ import java.util.List;
 //@Disabled
 public class CartConsumerContractTest {
 
-    @Autowired
-    ObjectMapper objectMapper;
+//    @Autowired
+//    ObjectMapper objectMapper;
     @Autowired
     private ProductClient productClient;
     @Pact(consumer = "cartConsumerPact")
