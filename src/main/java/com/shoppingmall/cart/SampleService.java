@@ -19,8 +19,13 @@ public class SampleService {
 
   public ZonedDateTime getUpdatedTime() {
 
-    return restTemplate().getForObject("http://localhost:8088/vodqa",ZonedDateTime.class);
+    return restTemplate().getForObject("http://localhost:8088/9001",ZonedDateTime.class);
   }
+  public String getString() {
+
+    return restTemplate().getForObject("http://localhost:8088/9001",String.class);
+  }
+
 
   public RestTemplate restTemplate() {
     return restTemplateBuilder.build();

@@ -2,12 +2,13 @@ plugins {
 	id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id 'au.com.dius.pact' version '3.5.23'
+	id 'au.com.dius.pact' version '4.0.0'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
 
 configurations {
 	compileOnly {
@@ -22,6 +23,7 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'au.com.dius', name: 'pact-jvm-provider-gradle', version: '4.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	compileOnly 'org.projectlombok:lombok'
