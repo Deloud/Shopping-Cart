@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.junit.Assert.assertEquals;
 import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
@@ -41,7 +42,7 @@ public class samplePact {
 
   @Pact(consumer = "cart")
   public RequestResponsePact callCartClient(PactDslWithProvider builder) throws JsonProcessingException {
-    String expectedString = "contract test for second consumer";
+    String expectedString = "{\"contract test success\"}";
     String expectedStringJson = objectMapper.writeValueAsString(expectedString);
 
     PactDslRootValue pactDslResponse = new PactDslRootValue();
@@ -53,7 +54,7 @@ public class samplePact {
     return builder
             .given("product list")
             .uponReceiving("test-account-service")
-            .path("/9001")
+            .path("/a")
             .method(HttpMethod.GET.name())
             .willRespondWith()
             .status(HttpStatus.OK.value())
@@ -63,12 +64,11 @@ public class samplePact {
   }
 
   @Test
-  @PactVerification(value = "product", fragment = "createPactForGetString")
+  @PactVerification(value = "product", fragment = "callCartClient")
   public void testConsumerGetRequestToString() {
-    String expectedString = "{\"id\":9001,\"total_price\":0,\"products\":[]}";
+    String expectedString = "{\"contract test success\"}";
 
     String resultString = sampleService.getString();
-    System.out.println(resultString);
 
     assertEquals(expectedString, resultString);
 
