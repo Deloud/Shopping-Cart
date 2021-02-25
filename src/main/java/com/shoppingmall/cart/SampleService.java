@@ -23,7 +23,7 @@ public class SampleService {
   }
   public String getString() {
 
-    return restTemplate().getForObject("http://localhost:8088/a",String.class);
+    return restTemplate().getForObject("http://localhost:8088/a",String.class);//HTTP GET 방식으로 URL에 연결하여 결과를 String으로 구한다
   }
 
 
