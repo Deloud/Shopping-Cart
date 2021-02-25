@@ -27,6 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class samplePact {
 
   private static final String HOST_NAME = "localhost";
