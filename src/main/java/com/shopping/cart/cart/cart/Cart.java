@@ -57,9 +57,10 @@ public class Cart {
         return product_list.get(id);
     }
 
-    public void setProduct_listtoid(int id, int plus) {
+    public void setProduct_listtoid(int id, int product_id, int count) {
         List<String> input = this.product_list.get(id);
-        input.add(Integer.toString(plus));
+        input.add(product_id+" : "+count);
+//        input.add(Integer.toString(product_id)+"번 상품 "+Integer.toString(count)+"개");
         this.product_list.put(id,input);
     }
 
