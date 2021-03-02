@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Optional;
 
 @RestController
@@ -32,23 +33,22 @@ public class CartController {
 
     @GetMapping("/{id}")
     public JSONObject retrieveAllPostsByUser(@PathVariable int id) throws ParseException {
-        String output = "{" + "id:" + resturant.getIdtoid(id) + ", totalprice:" + resturant.getTotalpricetoid(id) + "}";
+        String output = "{" + "id:" + resturant.getIdtoid(id) + ", totalprice:" + resturant.getTotalpricetoid(id) + ", product_list:" + resturant.getProduct_listtoid(id) + "}";
 
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(output);
         JSONObject jsonObj = (JSONObject) obj;
-//        resturant.getProduct_list().stream().forEach(System.out::println);
-        System.out.println(resturant.getProduct_listtoid(id).length);
+
         return jsonObj;
     }
 
     @PostMapping("")
     public String addProduct(@RequestBody Param param){
+        Product product = restTemplate.getForObject("http://localhost:8088/".concat(Integer.toString(param.getProduct_id())), Product.class);
+        resturant.setProduct_listtoid(param.getUser_id(),param.getProduct_id());
+        resturant.setTotalpricetoid(param.getUser_id(),(product.getPrice() * param.getCount()));
 
-        resturant.product_list.add(new String[]{"1", "2"});
-        resturant.product_list.set(param.getUser_id()-1,resturant.product_list.get(param.getUser_id()-1));
-
-        return "add 1 ,2";
+        return "Post Successful";
     }
 
 }

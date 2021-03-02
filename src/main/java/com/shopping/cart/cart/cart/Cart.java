@@ -5,13 +5,12 @@ import java.util.*;
 public class Cart {
 
     private List<String> id, totalprice;
-    ArrayList<String[]> product_list = new ArrayList<String[]>();
-    private Map<Integer, String> menus;
+    private Map<Integer, List<String>> product_list;
 
     Cart() {
         id = new ArrayList<>();
         totalprice = new ArrayList<>();
-        menus = new HashMap<>();
+        product_list = new HashMap<>();
     }
 
     public List<String> getId() {
@@ -40,27 +39,28 @@ public class Cart {
         this.totalprice = totalprice;
     }
 
+    public void setTotalpricetoid(int id, int plus) {
+        this.totalprice.set(id-1,Integer.toString(plus));
+    }
+
     //---
 
-    public Map<Integer, String> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(Map<Integer, String> menus) {
-        this.menus = menus;
-    }
-
-    //-----
-
-    public String[] getProduct_listtoid(int id) {
-        return product_list.get(id - 1);
-    }
-
-    public void setProduct_list(String[] product_list) {
-        this.product_list.add(product_list);
-    }
-
-    public ArrayList<String[]> getProduct_list() {
+    public Map<Integer, List<String>> getProduct_list() {
         return product_list;
     }
+
+    public void setProduct_list(Map<Integer, List<String>> product_list) {
+        this.product_list = product_list;
+    }
+
+    public List<String> getProduct_listtoid(int id) {
+        return product_list.get(id);
+    }
+
+    public void setProduct_listtoid(int id, int plus) {
+        List<String> input = this.product_list.get(id);
+        input.add(Integer.toString(plus));
+        this.product_list.put(id,input);
+    }
+
 }

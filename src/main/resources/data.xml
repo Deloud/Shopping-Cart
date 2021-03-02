@@ -23,33 +23,30 @@
         </property>
 
         <property name="product_list">
-            <list>
-                <value>{"10","15"}</value>
-                <value>{}</value>
-                <value>{}</value>
-                <value>{}</value>
-            </list>
-        </property>
-
-        <property name="menus">
             <map>
                 <entry>
                     <key>
                         <value>1</value>
                     </key>
-                    <value>KingCrap</value>
+                    <value></value>
                 </entry>
                 <entry>
                     <key>
                         <value>2</value>
                     </key>
-                    <value>IceCream</value>
+                    <value></value>
                 </entry>
                 <entry>
                     <key>
                         <value>3</value>
                     </key>
-                    <value>Pork</value>
+                    <value></value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>4</value>
+                    </key>
+                    <value></value>
                 </entry>
             </map>
         </property>

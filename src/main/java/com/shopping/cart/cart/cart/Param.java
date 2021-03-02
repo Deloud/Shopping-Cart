@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class Param {
     private int user_id;
     private int product_id;
-//    private int count;
+    private int count;
 }
