@@ -34,7 +34,6 @@ public class CartController {
     @GetMapping("/{id}")
     public JSONObject retrieveAllPostsByUser(@PathVariable int id) throws ParseException {
         String output = "{" + "id:" + resturant.getIdtoid(id) + ", totalprice:" + resturant.getTotalpricetoid(id) + ", product_list:" + resturant.getProduct_listtoid(id) + "}";
-
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(output);
         JSONObject jsonObj = (JSONObject) obj;
@@ -44,9 +43,9 @@ public class CartController {
 
     @PostMapping("")
     public String addProduct(@RequestBody Param param){
-        Product product = restTemplate.getForObject("http://localhost:8091/".concat(Integer.toString(param.getProduct_id())), Product.class);
+        Product product = restTemplate.getForObject("http://localhost:8088/".concat(Integer.toString(param.getProduct_id())), Product.class);
         resturant.setProduct_listtoid(param.getUser_id(),param.getProduct_id(),param.getCount());
-        resturant.setTotalpricetoid(param.getUser_id(),(product.getPrice() * param.getCount()));
+        resturant.setTotalpricetoid(param.getUser_id(),(product.getPrice()*param.getCount()));
 
         return "Post Successful";
     }
