@@ -31,10 +31,19 @@ public class CartController {
     GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("data.xml");
     Cart resturant = ctx.getBean("cart1", Cart.class);
 
+
+
+    @GetMapping("")
+    public String test(){
+        System.out.println(resturant.getDetail(resturant.getProduct_listtoid(1)));
+        return "okey";
+    }
+
     @GetMapping("/{id}")
     public JSONObject retrieveAllPostsByUser(@PathVariable int id) throws ParseException {
+//        String output = "{" + "id:" + resturant.getIdtoid(id) + ", totalprice:" + resturant.getTotalpricetoid(id) + ", product_list:" + resturant.getDetail(resturant.getProduct_listtoid(id)) + "}";
         String output = "{" + "id:" + resturant.getIdtoid(id) + ", totalprice:" + resturant.getTotalpricetoid(id) + ", product_list:" + resturant.getProduct_listtoid(id) + "}";
-
+        System.out.println(output + " ");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(output);
         JSONObject jsonObj = (JSONObject) obj;
