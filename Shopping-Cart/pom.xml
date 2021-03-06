@@ -8,17 +8,14 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.shopping.cart</groupId>
-    <artifactId>product2</artifactId>
+    <artifactId>cart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>product2</name>
+    <name>cart</name>
     <description>Demo project for Spring Boot</description>
-
     <properties>
         <java.version>11</java.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,12 +34,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin.external.google</groupId>
-            <artifactId>android-json</artifactId>
-            <version>0.0.20131108.vaadin1</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.minidev</groupId>
@@ -65,27 +56,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
             <plugin>
-				<groupId>au.com.dius</groupId>
-				<artifactId>pact-jvm-provider-maven_2.11</artifactId>
-				<version>3.5.10</version>
-				<configuration>
-					<serviceProviders>
-						<!-- You can define as many as you need, but each must have a unique name -->
-						<serviceProvider>
-							<name>Service12</name>
-							<!-- All the provider properties are optional, and have sensible defaults (shown below) -->
-							<protocol>http</protocol>
-							<host>localhost</host>
-							<port>8088</port>
-							<path>/</path>
-							<pactBrokerUrl>http://localhost:9292/</pactBrokerUrl>
-						</serviceProvider>
-					</serviceProviders>
-					<pactBrokerUrl/>
-				</configuration>
-			</plugin>
+                <groupId>au.com.dius</groupId>
+                <artifactId>pact-jvm-provider-maven_2.12</artifactId>
+                <version>3.5.10</version>
+                <configuration>
+                    <serviceProviders>
+                        <!-- You can define as many as you need, but each must have a unique name -->
+                        <serviceProvider>
+                            <name>Service</name>
+                            <!-- All the provider properties are optional, and have sensible defaults (shown below) -->
+                            <protocol>http</protocol>
+                            <host>localhost</host>
+                            <port>8089</port>
+                            <path>/</path>
+                            <pactBrokerUrl>http://localhost:9292/</pactBrokerUrl>
+                        </serviceProvider>
+                    </serviceProviders>
+                    <pactBrokerUrl/>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
