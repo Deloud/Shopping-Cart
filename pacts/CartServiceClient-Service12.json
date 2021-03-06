@@ -19,9 +19,10 @@
                 },
                 "body": {
                     "id": 1,
-                    "productlist": [
-                        2
-                    ],
+                    "product_list": {
+                        "1": 2,
+                        "2": 3
+                    },
                     "totalprice": 0
                 },
                 "matchingRules": {
@@ -42,16 +43,15 @@
                             ],
                             "combine": "AND"
                         },
-                        "$.productlist": {
+                        "$.product_list.1": {
                             "matchers": [
                                 {
-                                    "match": "type",
-                                    "min": 1
+                                    "match": "integer"
                                 }
                             ],
                             "combine": "AND"
                         },
-                        "$.productlist[*]": {
+                        "$.product_list.2": {
                             "matchers": [
                                 {
                                     "match": "integer"

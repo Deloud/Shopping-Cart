@@ -31,7 +31,9 @@ public class WhenGetCartTest {
         DslPart userResults = new PactDslJsonBody()
                 .integerType("totalprice",0)
                 .integerType("id",1) // string value까지 확인
-                .minArrayLike("productlist", 1, PactDslJsonRootValue.integerType(2), 1)
+                .object("product_list")
+                    .integerType("1",2)
+                    .integerType("2",3)
                 .asBody();
 
         return builder
