@@ -4,6 +4,7 @@ import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
+import au.com.dius.pact.consumer.dsl.PactDslJsonRootValue;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 import org.junit.Assert;
@@ -14,10 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import java.lang.Integer;
 
 public class WhenGetCartTest {
     @Rule
-    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("Service", "localhost", 8088, this);
+    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("Service12", "localhost", 8089, this);
 
     // pact 정의
     @Pact(consumer = "CartServiceClient")
@@ -29,6 +31,7 @@ public class WhenGetCartTest {
         DslPart userResults = new PactDslJsonBody()
                 .integerType("totalprice",0)
                 .integerType("id",1) // string value까지 확인
+                .minArrayLike("productlist", 1, PactDslJsonRootValue.integerType(2), 1)
                 .asBody();
 
         return builder
