@@ -19,21 +19,18 @@ import java.lang.Integer;
 
 public class WhenGetCartTest {
     @Rule
-    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("Service", "localhost", 8089, this);
+    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("productservice", "localhost", 8088, this);
 
     // pact 정의
-    @Pact(consumer = "Cartclient")
+    @Pact(consumer = "cartservice")
     public RequestResponsePact createPact(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap();
         headers.put("Content-Type", "application/json");
 
         // 우리가 원하는 최종 결과 = response 의 body 부분
         DslPart userResults = new PactDslJsonBody()
-                .integerType("id",1)
-                .integerType("totalprice",0)
-//                .object("product_list")
-//                    .integerType("1",3)
-//                    .integerType("2",4)
+                .integerType("price",1000)
+                .stringValue("name","Apple") // string value까지 확인
                 .asBody();
 
         return builder

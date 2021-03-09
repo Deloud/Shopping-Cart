@@ -1,9 +1,9 @@
 {
     "provider": {
-        "name": "Service"
+        "name": "productservice"
     },
     "consumer": {
-        "name": "Cartclient"
+        "name": "cartservice"
     },
     "interactions": [
         {
@@ -18,20 +18,12 @@
                     "Content-Type": "application/json"
                 },
                 "body": {
-                    "id": 1,
-                    "totalprice": 0
+                    "name": "Apple",
+                    "price": 1000
                 },
                 "matchingRules": {
                     "body": {
-                        "$.id": {
-                            "matchers": [
-                                {
-                                    "match": "integer"
-                                }
-                            ],
-                            "combine": "AND"
-                        },
-                        "$.totalprice": {
+                        "$.price": {
                             "matchers": [
                                 {
                                     "match": "integer"
