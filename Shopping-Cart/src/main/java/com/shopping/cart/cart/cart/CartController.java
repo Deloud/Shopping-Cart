@@ -65,4 +65,11 @@ public class CartController {
         return "Post Successful";
     }
 
+    @DeleteMapping("/{id}/all")
+    public String resetCart(@PathVariable int id){
+        cartList.remove(id-1);
+        cartList.add(id-1,new Cart(id,0));
+        return "Reset Cart Successfull";
+    }
+
 }
