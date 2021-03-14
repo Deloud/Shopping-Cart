@@ -57,12 +57,26 @@ public class CartController {
         return cartList.get(id-1);
     }
 
+    @GetMapping("user/{id}")
+    public User retrieveUserData (@PathVariable int id) {
+        User User_data = restTemplate.getForObject("http://localhost:8090/".concat(Integer.toString(id)), User.class);
+        User_data.setId(id);
+        return User_data;
+    }
+
     @PostMapping("")
     public String addProduct(@RequestBody Param param){
         Product product = restTemplate.getForObject("http://localhost:8088/".concat(Integer.toString(param.getProduct_id())), Product.class);
         cartList.get(param.getUser_id()-1).putInToProductList(param.getProduct_id(), param.getCount());
         cartList.get(param.getUser_id()-1).addTotalprice(product.getPrice() * param.getCount());
         return "Post Successful";
+    }
+
+    @DeleteMapping("/{id}/all")
+    public String resetCart(@PathVariable int id){
+        cartList.remove(id-1);
+        cartList.add(id-1,new Cart(id,0));
+        return "Reset Cart Successfull";
     }
 
 }
