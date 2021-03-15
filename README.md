@@ -44,7 +44,7 @@ $ mvn pact:publish
 1) consumer : **cart**
 2) provider : **customer** 
 
-## 1. Test Order 
+## 2. Test Order 
 
 Consumer - Shopping Cart Make Mockup Test and Pact Publish
 
