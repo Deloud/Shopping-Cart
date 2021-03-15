@@ -38,12 +38,33 @@ $ mvn install
 $ mvn pact:publish
 ```
 
+
 ## 2. Consumer- Provider
+
+1) consumer : **cart**
+2) provider : **customer** 
+
+## 1. Test Order 
+
+Consumer - Shopping Cart Make Mockup Test and Pact Publish
+
+1. [Service Build] [/customerclient]
+```
+$ mvn install
+```
+
+2. [Pact publish] [/customerclient]
+```
+$ mvn pact:publish
+```
+
+## 3. Consumer- Provider
 
 1) consumer : **order**
 2) provider : **cart**
 
-## 2. Test Order
+
+## 3. Test Order
 
 Provider - Shopping-Product Service Build & Run 
 
