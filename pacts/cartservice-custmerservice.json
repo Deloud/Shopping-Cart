@@ -1,0 +1,41 @@
+{
+    "provider": {
+        "name": "custmerservice"
+    },
+    "consumer": {
+        "name": "cartservice"
+    },
+    "interactions": [
+        {
+            "description": "A request for customer information",
+            "request": {
+                "method": "GET",
+                "path": "/1"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "address": "\uc548\uc0b0",
+                    "name": "JEJ",
+                    "phone_number": "010-1234-6878"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "Request customer information has id 1"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.10"
+        }
+    }
+}
