@@ -19,7 +19,7 @@ import java.lang.Integer;
 
 public class WhenGetCustomerTest {
     @Rule
-    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("custmerservice", "localhost", 8090, this);
+    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("customerservice", "localhost", 8090, this);
 
     // pact 정의
     @Pact(consumer = "cartservice")
